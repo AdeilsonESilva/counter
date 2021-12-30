@@ -1,11 +1,15 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+
+import { ThemeProvider } from 'styled-components'
+import { light } from '@styles/theme'
+
+import { Home } from '@screens/Home'
 
 export const App: React.FC = () => {
   return (
-    <View>
-      <Text>Counter</Text>
-    </View>
+    <ThemeProvider theme={light}>
+      <Home />
+    </ThemeProvider>
   )
 }
 
