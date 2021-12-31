@@ -12,5 +12,11 @@ export const light = {
     icon: '#7D7D7D',
 
     background: '#FFFFFF'
+  },
+  FONTS: {
+    primary_semiBold: 'Epilogue-SemiBold',
+    primary_bold: 'Epilogue-Bold',
+
+    secondary_medium: 'DMSans-Medium'
   }
 }

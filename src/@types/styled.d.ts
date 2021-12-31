@@ -16,6 +16,12 @@ declare module 'styled-components' {
 
       background: string
     }
+    FONTS: {
+      primary_semiBold: string
+      primary_bold: string
+
+      secondary_medium: string
+    }
   }
 
   export interface DefaultTheme extends ITheme {}
