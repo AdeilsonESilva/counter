@@ -1,5 +1,7 @@
 import styled from 'styled-components/native'
 
+import { MotiView } from 'moti'
+
 import { RFValue } from 'react-native-responsive-fontsize'
 import { BorderlessButton } from 'react-native-gesture-handler'
 
@@ -14,5 +16,7 @@ export const Title = styled.Text`
   font-family: ${({ theme }) => theme.FONTS.primary_bold};
   color: ${({ theme }) => theme.COLORS.title};
 `
+
+export const ToggleThemeWrapper = styled(MotiView)``
 
 export const ToggleTheme = styled(BorderlessButton)``
