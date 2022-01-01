@@ -6,7 +6,7 @@ import { useAnimationState } from 'moti'
 import Icon from 'react-native-vector-icons/Feather'
 import { RFValue } from 'react-native-responsive-fontsize'
 
-import { Container, Title, ToggleTheme, ToggleThemeWrapper } from './styles'
+import { Container, Title, ToggleThemeWrapper, ToggleTheme } from './styles'
 
 Icon.loadFont()
 
