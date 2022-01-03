@@ -10,6 +10,7 @@ declare module 'styled-components' {
       description: string
 
       border: string
+      border_light: string
       shape: string
 
       icon: string
