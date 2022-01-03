@@ -19,7 +19,7 @@ export const Home: React.FC = () => {
         barStyle="dark-content"
         backgroundColor="transparent"
       />
-      <Header />
+      <Header title="Counters" />
 
       <Content>
         {/* <EmptyList>
