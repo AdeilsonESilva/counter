@@ -10,7 +10,11 @@ import { Container, Title, ToggleThemeWrapper, ToggleTheme } from './styles'
 
 Icon.loadFont()
 
-export const Header: React.FC = () => {
+interface Props {
+  title: string
+}
+
+export const Header: React.FC<Props> = ({ title }) => {
   const { COLORS } = useTheme()
 
   const [toggleTheme, setToggleTheme] = useState(false)
@@ -31,7 +35,7 @@ export const Header: React.FC = () => {
   })
 
   function handleToggleTheme() {
-    const delay = 500
+    const delay = 200
 
     animationState.transitionTo('close')
 
@@ -43,7 +47,7 @@ export const Header: React.FC = () => {
 
   return (
     <Container>
-      <Title>Counters</Title>
+      <Title>{title}</Title>
 
       <ToggleThemeWrapper state={animationState}>
         <ToggleTheme onPress={handleToggleTheme}>
