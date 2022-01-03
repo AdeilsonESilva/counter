@@ -18,7 +18,11 @@ export const Container = styled(MotiView).attrs({
     opacity: 1,
     translateX: 0
   }
-})``
+})`
+  min-width: 100%;
+
+  padding: 0 16px;
+`
 
 export const CardBase = styled(TouchableOpacity)<CardBaseProps>`
   width: 100%;
@@ -55,4 +59,16 @@ export const Amount = styled.Text`
   text-align: right;
 
   margin-right: 16px;
+`
+
+export const DeleteButton = styled.TouchableOpacity.attrs({
+  activeOpacity: 0.7
+})`
+  width: 72px;
+  height: ${RFValue(120)}px;
+
+  justify-content: center;
+  align-items: center;
+
+  padding-right: 14px;
 `

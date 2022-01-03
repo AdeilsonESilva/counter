@@ -37,8 +37,17 @@ export const Home: React.FC = () => {
         </EmptyList> */}
 
         <AccountantsCard
-          data={{ title: 'Respiração ', amount: '42' }}
+          data={{ title: 'Respiração', amount: '42' }}
           delay={1}
+          selected
+        />
+        <AccountantsCard
+          data={{ title: 'Vezes que acordei', amount: '1' }}
+          delay={2}
+        />
+        <AccountantsCard
+          data={{ title: 'Coxinhas que comi na semana', amount: '16' }}
+          delay={3}
         />
       </Content>
     </Container>
