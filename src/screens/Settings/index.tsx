@@ -1,4 +1,5 @@
 import React from 'react'
+import { StatusBar } from 'react-native'
 
 import { Header } from '@components/Header'
 import { Button } from '@components/Button'
@@ -9,6 +10,12 @@ import { Container, Content, Title, AccountantSession } from './styles'
 export const Settings: React.FC = () => {
   return (
     <Container>
+      <StatusBar
+        translucent
+        barStyle="dark-content"
+        backgroundColor="transparent"
+      />
+
       <Header title="Settings" />
 
       <Content>
