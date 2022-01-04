@@ -1,5 +1,7 @@
 import styled from 'styled-components/native'
 
+import Lottie from 'lottie-react-native'
+
 import { getStatusBarHeight } from 'react-native-iphone-x-helper'
 import { RFValue, RFPercentage } from 'react-native-responsive-fontsize'
 
@@ -16,12 +18,20 @@ export const Content = styled.View`
   padding-top: 64px;
 `
 
-export const EmptyList = styled.View`
+export const ListCounters = styled.ScrollView.attrs({
+  showsVerticalScrollIndicator: false
+})``
+
+export const EmptyContainer = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
 
   margin-bottom: ${RFPercentage(15)}px;
+`
+
+export const EmptyDogAnimation = styled(Lottie)`
+  width: ${RFValue(200)}px;
 `
 
 export const EmptyTitle = styled.Text`
