@@ -3,6 +3,10 @@ import { ModalProps, Platform } from 'react-native'
 
 import { useTheme } from 'styled-components'
 
+import uuid from 'react-native-uuid'
+
+import { getRealm } from '@services/realm'
+
 import {
   Container,
   Wrapper,
@@ -25,6 +29,23 @@ export const CreateAccountant: React.FC<Props> = ({
   const { COLORS } = useTheme()
 
   const [counter, setCounter] = useState('')
+
+  async function handleCreationNewAccountant() {
+    if (!counter) return
+
+    const realm = await getRealm()
+
+    const data = {
+      id: String(uuid.v4()),
+      title: counter,
+      amount: '0'
+    }
+
+    realm.write(() => {
+      realm.create('Counters', data)
+    })
+    setCounter('')
+  }
 
   return (
     <Container transparent animationType="fade" {...rest}>
@@ -51,7 +72,7 @@ export const CreateAccountant: React.FC<Props> = ({
 
             <Button
               backgroundColor={COLORS.main_light}
-              onPress={() => console.log('Add')}
+              onPress={handleCreationNewAccountant}
             >
               <ButtonText textColor={COLORS.main}>Add</ButtonText>
             </Button>
