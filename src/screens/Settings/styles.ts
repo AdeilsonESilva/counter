@@ -27,3 +27,25 @@ export const AccountantSession = styled.View`
 
   margin: 16px 0 32px;
 `
+
+export const ConfirmChangeButton = styled.TouchableOpacity.attrs({
+  activeOpacity: 0.7
+})`
+  width: 100%;
+  height: ${RFValue(55)}px;
+
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 16px;
+
+  margin-top: 32px;
+
+  background-color: ${({ theme }) => theme.COLORS.main_light};
+`
+
+export const ConfirmChangeButtonText = styled.Text`
+  font-size: ${RFValue(16)}px;
+  font-family: ${({ theme }) => theme.FONTS.secondary_medium};
+  color: ${({ theme }) => theme.COLORS.main};
+`

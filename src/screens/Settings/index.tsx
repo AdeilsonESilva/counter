@@ -7,7 +7,14 @@ import { SelectedCounter } from '@components/SelectedCounter'
 import { CreateAccountant } from '@components/CreateAccountant'
 import { Modal } from '@components/Modal'
 
-import { Container, Content, Title, AccountantSession } from './styles'
+import {
+  Container,
+  Content,
+  Title,
+  AccountantSession,
+  ConfirmChangeButton,
+  ConfirmChangeButtonText
+} from './styles'
 
 export const Settings: React.FC = () => {
   const [isModalDelete, setIsModalDelete] = useState(false)
@@ -42,6 +49,10 @@ export const Settings: React.FC = () => {
         <Title>Selected counter</Title>
 
         <SelectedCounter />
+
+        <ConfirmChangeButton>
+          <ConfirmChangeButtonText>Confirm change</ConfirmChangeButtonText>
+        </ConfirmChangeButton>
       </Content>
 
       <CreateAccountant
