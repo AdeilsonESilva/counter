@@ -4,11 +4,11 @@ class CounterSchema {
   static schema = {
     name: 'Counters',
     properties: {
-      _id: 'string',
+      id: 'string',
       title: 'string',
       amount: 'string'
     },
-    primaryKey: '_id'
+    primaryKey: 'id'
   }
 }
 
