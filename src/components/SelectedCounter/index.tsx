@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { useTheme } from 'styled-components'
 
 import Icon from 'react-native-vector-icons/Feather'
 import { RFValue } from 'react-native-responsive-fontsize'
+
+import { Modal } from '@components/Modal'
 
 import {
   Container,
@@ -18,6 +20,8 @@ import {
 export const SelectedCounter: React.FC = () => {
   const { COLORS } = useTheme()
 
+  const [isModalClear, setIsModalClear] = useState(false)
+
   return (
     <Container>
       <Title>Respiração</Title>
@@ -28,7 +32,7 @@ export const SelectedCounter: React.FC = () => {
           <Icon name="minus" size={RFValue(24)} color={COLORS.main} />
         </Button>
 
-        <ClearButton>
+        <ClearButton onPress={() => setIsModalClear(!isModalClear)}>
           <ClearTitle>Clear</ClearTitle>
         </ClearButton>
 
@@ -36,6 +40,15 @@ export const SelectedCounter: React.FC = () => {
           <Icon name="plus" size={RFValue(24)} color={COLORS.main} />
         </Button>
       </Control>
+
+      <Modal
+        type="clear"
+        actions={{
+          negative: () => setIsModalClear(!isModalClear),
+          positive: () => console.log('Clear')
+        }}
+        visible={isModalClear}
+      />
     </Container>
   )
 }
