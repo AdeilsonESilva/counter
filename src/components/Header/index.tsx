@@ -8,8 +8,6 @@ import { RFValue } from 'react-native-responsive-fontsize'
 
 import { Container, Title, ToggleThemeWrapper, ToggleTheme } from './styles'
 
-Icon.loadFont()
-
 interface Props {
   title: string
 }

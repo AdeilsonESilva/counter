@@ -5,14 +5,14 @@ import { RFValue } from 'react-native-responsive-fontsize'
 
 export const Container = styled.View`
   flex: 1;
-  padding: ${getStatusBarHeight() + 32}px 16px 0;
+  padding-top: ${getStatusBarHeight() + 32}px;
 
   background-color: ${({ theme }) => theme.COLORS.background};
 `
 
 export const Content = styled.View`
   flex: 1;
-  padding-top: 64px;
+  padding: 64px 16px 0;
 `
 
 export const Title = styled.Text`
