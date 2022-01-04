@@ -6,7 +6,7 @@ class CounterSchema {
     properties: {
       _id: 'string',
       title: 'string',
-      Amount: 'string'
+      amount: 'string'
     },
     primaryKey: '_id'
   }
