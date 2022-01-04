@@ -15,6 +15,7 @@ declare module 'styled-components' {
 
       icon: string
 
+      opacity_dark: string
       background: string
     }
     FONTS: {

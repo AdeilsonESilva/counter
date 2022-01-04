@@ -12,6 +12,7 @@ export const theme = {
 
     icon: '#7D7D7D',
 
+    opacity_dark: 'rgba(0, 0, 0, 0.5)',
     background: '#FFFFFF'
   },
   FONTS: {
