@@ -27,19 +27,3 @@ export const AccountantSession = styled.View`
 
   margin: 16px 0 32px;
 `
-
-export const Input = styled.TextInput`
-  width: 100%;
-  height: ${RFValue(55)}px;
-
-  font-size: ${RFValue(16)}px;
-  font-family: ${({ theme }) => theme.FONTS.secondary_medium};
-  color: ${({ theme }) => theme.COLORS.description};
-
-  padding: 0 16px;
-
-  border: 1px solid ${({ theme }) => theme.COLORS.border};
-  border-radius: 8px;
-
-  background-color: ${({ theme }) => theme.COLORS.shape};
-`

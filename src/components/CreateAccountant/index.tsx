@@ -1,5 +1,5 @@
-import React from 'react'
-import { ModalProps } from 'react-native'
+import React, { useState } from 'react'
+import { ModalProps, Platform } from 'react-native'
 
 import { useTheme } from 'styled-components'
 
@@ -8,25 +8,23 @@ import {
   Wrapper,
   Content,
   Title,
+  Input,
   Footer,
   Button,
   ButtonText
 } from './styles'
 
 interface Props extends ModalProps {
-  field: React.FC
-  actions: {
-    negative(): void
-    positive(): void
-  }
+  onCloseModal(): void
 }
 
 export const CreateAccountant: React.FC<Props> = ({
-  field: Field,
-  actions,
+  onCloseModal,
   ...rest
 }) => {
   const { COLORS } = useTheme()
+
+  const [counter, setCounter] = useState('')
 
   return (
     <Container transparent animationType="fade" {...rest}>
@@ -34,19 +32,26 @@ export const CreateAccountant: React.FC<Props> = ({
         <Content>
           <Title>Add new counter</Title>
 
-          <Field />
+          <Input
+            placeholder="Counter name"
+            selectionColor={
+              Platform.OS === 'ios' ? COLORS.main : COLORS.main_light
+            }
+            onChangeText={setCounter}
+            value={counter}
+          />
 
           <Footer>
             <Button
               backgroundColor={COLORS.border_light}
-              onPress={actions.negative}
+              onPress={onCloseModal}
             >
               <ButtonText textColor={COLORS.icon}>Cancel</ButtonText>
             </Button>
 
             <Button
               backgroundColor={COLORS.main_light}
-              onPress={actions.positive}
+              onPress={() => console.log('Add')}
             >
               <ButtonText textColor={COLORS.main}>Add</ButtonText>
             </Button>
