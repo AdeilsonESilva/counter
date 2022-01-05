@@ -9,8 +9,6 @@ import { SelectedCounter } from '@components/SelectedCounter'
 import { CreateAccountant } from '@components/CreateAccountant'
 import { Modal } from '@components/Modal'
 
-import { getRealm } from '@services/realm'
-
 import {
   Container,
   Content,
@@ -43,12 +41,6 @@ export const Settings: React.FC = () => {
 
   async function handleDeleteCounter(id: string) {
     try {
-      const realm = await getRealm()
-
-      realm.write(() => {
-        realm.delete(realm.objectForPrimaryKey('Counters', id))
-      })
-
       if (counterSelected!.id === id) {
         setCounterSelected(null)
       }

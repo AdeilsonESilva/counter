@@ -1,11 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { StatusBar, Alert } from 'react-native'
 
-import { useIsFocused } from '@react-navigation/native'
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs'
 import { useCounter } from '@hooks/useCounter'
 
-import { getRealm } from '@services/realm'
 import { ICounter } from '@dtos/counter'
 
 import { Header } from '@components/Header'
@@ -28,16 +26,12 @@ export const Home: React.FC = () => {
   const { counters, setCounters, counterSelected, setCounterSelected } =
     useCounter()
 
-  const checkFocused = useIsFocused()
-
   function handleCounterSelection(counter: ICounter) {
     setCounterSelected(counter)
   }
 
   async function handleDeleteCounter(id: string) {
     try {
-      const realm = await getRealm()
-
       setCounters(counters.filter(counter => counter.id !== id))
 
       if (counterSelected) {
@@ -45,11 +39,6 @@ export const Home: React.FC = () => {
           setCounterSelected(null)
         }
       }
-
-      realm.write(() => {
-        const filteredCounter = realm.objectForPrimaryKey('Counters', id)
-        realm.delete(filteredCounter)
-      })
     } catch {
       Alert.alert(
         'An error has occurred',
@@ -57,23 +46,6 @@ export const Home: React.FC = () => {
       )
     }
   }
-
-  useEffect(() => {
-    async function loadRegisteredCounters() {
-      try {
-        const realm = await getRealm()
-
-        const data = realm.objects('Counters') as any
-        setCounters(data)
-      } catch {
-        Alert.alert(
-          'An error has occurred',
-          'It was not possible to list your registered accountants. Try again.'
-        )
-      }
-    }
-    loadRegisteredCounters()
-  }, [checkFocused === true])
 
   return (
     <Container>

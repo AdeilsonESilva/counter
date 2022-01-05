@@ -3,12 +3,10 @@ import { ModalProps, Platform } from 'react-native'
 
 import { useTheme } from 'styled-components'
 
-import Icon from 'react-native-vector-icons/Feather'
-
 import uuid from 'react-native-uuid'
 import { RFValue } from 'react-native-responsive-fontsize'
 
-import { getRealm } from '@services/realm'
+import Icon from 'react-native-vector-icons/Feather'
 
 import {
   Container,
@@ -42,17 +40,13 @@ export const CreateAccountant: React.FC<Props> = ({
   async function handleCreationNewAccountant() {
     if (!counter) return
 
-    const realm = await getRealm()
-
     const data = {
       id: String(uuid.v4()),
       title: counter,
       amount: '0'
     }
 
-    realm.write(() => {
-      realm.create('Counters', data)
-    })
+    console.log(data)
 
     setCounter('')
 
