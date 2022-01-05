@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StatusBar } from 'react-native'
+import { StatusBar, Alert } from 'react-native'
 
 import { useCounterSelected } from '@hooks/useCounterSelected'
 
@@ -47,7 +47,10 @@ export const Settings: React.FC = () => {
 
       setIsModalDelete(!isModalDelete)
     } catch {
-      console.log('Unable to delete counter.')
+      Alert.alert(
+        'An error has occurred',
+        'It was not possible to delete this counter. Try again.'
+      )
     }
   }
 

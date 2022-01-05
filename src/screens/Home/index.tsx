@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StatusBar } from 'react-native'
+import { StatusBar, Alert } from 'react-native'
 
 import { useNavigationState } from '@react-navigation/native'
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs'
@@ -49,16 +49,26 @@ export const Home: React.FC = () => {
         setCounterSelected(null)
       }
     } catch {
-      console.log('Unable to delete counter.')
+      Alert.alert(
+        'An error has occurred',
+        'It was not possible to delete this counter. Try again.'
+      )
     }
   }
 
   useEffect(() => {
     async function loadRegisteredCounters() {
-      const realm = await getRealm()
+      try {
+        const realm = await getRealm()
 
-      const data = realm.objects('Counters') as any
-      setCounters(data)
+        const data = realm.objects('Counters') as any
+        setCounters(data)
+      } catch {
+        Alert.alert(
+          'An error has occurred',
+          'It was not possible to list your registered accountants. Try again.'
+        )
+      }
     }
     loadRegisteredCounters()
   }, [reloadRegisteredCounters])
