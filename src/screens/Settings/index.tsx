@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { StatusBar, Alert } from 'react-native'
 
 import { useCounter } from '@hooks/useCounter'
+import { useNavigation } from '@react-navigation/native'
 
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
@@ -25,6 +26,8 @@ import {
 
 export const Settings: React.FC = () => {
   const { counterSelected, setCounterSelected } = useCounter()
+
+  const navigation = useNavigation()
 
   const keyStorage = '@counter:storage'
 
@@ -94,6 +97,8 @@ export const Settings: React.FC = () => {
       )
 
       await AsyncStorage.setItem(keyStorage, JSON.stringify(updatedAccountant))
+
+      navigation.navigate('Home')
     } catch {
       Alert.alert(
         'An error has occurred',

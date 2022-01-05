@@ -14,6 +14,17 @@ import {
   CustomTabBarIcon
 } from '@components/CustomTabBar'
 
+type RootStackParamList = {
+  Home: any
+  Settings: any
+}
+
+declare global {
+  namespace ReactNavigation {
+    interface RootParamList extends RootStackParamList {}
+  }
+}
+
 const { Navigator, Screen } = createBottomTabNavigator()
 
 export const Routes: React.FC = () => {
