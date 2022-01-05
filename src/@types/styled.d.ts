@@ -6,6 +6,9 @@ declare module 'styled-components' {
       main: string
       main_light: string
 
+      success: string
+      success_light: string
+
       title: string
       description: string
 
