@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { StatusBar, Alert } from 'react-native'
 
-import { useNavigationState } from '@react-navigation/native'
+import { useIsFocused } from '@react-navigation/native'
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs'
-import { useCounterSelected } from '@hooks/useCounterSelected'
+import { useCounter } from '@hooks/useCounter'
 
 import { getRealm } from '@services/realm'
 import { ICounter } from '@dtos/counter'
@@ -25,11 +25,10 @@ import {
 export const Home: React.FC = () => {
   const TAB_HEIGHT = useBottomTabBarHeight()
 
-  const { counterSelected, setCounterSelected } = useCounterSelected()
+  const { counters, setCounters, counterSelected, setCounterSelected } =
+    useCounter()
 
-  const [counters, setCounters] = useState<ICounter[]>([])
-
-  const reloadRegisteredCounters = useNavigationState(state => state.index)
+  const checkFocused = useIsFocused()
 
   function handleCounterSelection(counter: ICounter) {
     setCounterSelected(counter)
@@ -41,13 +40,16 @@ export const Home: React.FC = () => {
 
       setCounters(counters.filter(counter => counter.id !== id))
 
-      realm.write(() => {
-        realm.delete(realm.objectForPrimaryKey('Counters', id))
-      })
-
-      if (counterSelected!.id === id) {
-        setCounterSelected(null)
+      if (counterSelected) {
+        if (counterSelected!.id === id) {
+          setCounterSelected(null)
+        }
       }
+
+      realm.write(() => {
+        const filteredCounter = realm.objectForPrimaryKey('Counters', id)
+        realm.delete(filteredCounter)
+      })
     } catch {
       Alert.alert(
         'An error has occurred',
@@ -71,7 +73,7 @@ export const Home: React.FC = () => {
       }
     }
     loadRegisteredCounters()
-  }, [reloadRegisteredCounters])
+  }, [checkFocused === true])
 
   return (
     <Container>

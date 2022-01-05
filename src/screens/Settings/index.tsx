@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { StatusBar, Alert } from 'react-native'
 
-import { useCounterSelected } from '@hooks/useCounterSelected'
+import { useCounter } from '@hooks/useCounter'
 
 import { Header } from '@components/Header'
 import { Button } from '@components/Button'
@@ -22,15 +22,23 @@ import {
 } from './styles'
 
 export const Settings: React.FC = () => {
-  const { counterSelected, setCounterSelected } = useCounterSelected()
+  const { counterSelected, setCounterSelected } = useCounter()
 
   const [isModalDelete, setIsModalDelete] = useState(false)
   const [isModalCreateAccountant, setIsModalCreateAccountant] = useState(false)
+
+  function handleOpenCounterCreationModal() {
+    setIsModalCreateAccountant(!isModalCreateAccountant)
+  }
 
   function handleOpenDeleteModal() {
     if (counterSelected) {
       setIsModalDelete(!isModalDelete)
     }
+  }
+
+  function handleCloseDeleteModal() {
+    setIsModalDelete(!isModalDelete)
   }
 
   async function handleDeleteCounter(id: string) {
@@ -71,7 +79,7 @@ export const Settings: React.FC = () => {
           <Button
             title="Add new counter"
             icon="plus-circle"
-            onPress={() => setIsModalCreateAccountant(!isModalCreateAccountant)}
+            onPress={handleOpenCounterCreationModal}
           />
           <Button
             title="Delete selected counter"
@@ -108,7 +116,7 @@ export const Settings: React.FC = () => {
       <Modal
         type="delete"
         actions={{
-          negative: () => setIsModalDelete(!isModalDelete),
+          negative: handleCloseDeleteModal,
           positive: () => handleDeleteCounter(counterSelected!.id)
         }}
         visible={isModalDelete}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import { useTheme } from 'styled-components'
-import { useCounterSelected } from '@hooks/useCounterSelected'
+import { useCounter } from '@hooks/useCounter'
 
 import Icon from 'react-native-vector-icons/Feather'
 import { RFValue } from 'react-native-responsive-fontsize'
@@ -27,7 +27,7 @@ interface Props {
 export const SelectedCounter: React.FC<Props> = ({ data }) => {
   const { COLORS } = useTheme()
 
-  const { counterSelected, setCounterSelected } = useCounterSelected()
+  const { counterSelected, setCounterSelected } = useCounter()
 
   const [isModalClear, setIsModalClear] = useState(false)
 

@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { ModalProps, Platform } from 'react-native'
 
 import { useTheme } from 'styled-components'
 
+import Icon from 'react-native-vector-icons/Feather'
+
 import uuid from 'react-native-uuid'
+import { RFValue } from 'react-native-responsive-fontsize'
 
 import { getRealm } from '@services/realm'
 
@@ -19,6 +22,7 @@ import {
 } from './styles'
 
 interface Props extends ModalProps {
+  visible: boolean
   onCloseModal(): void
 }
 
@@ -29,6 +33,11 @@ export const CreateAccountant: React.FC<Props> = ({
   const { COLORS } = useTheme()
 
   const [counter, setCounter] = useState('')
+
+  const [controlButtonType, setControlButtonType] = useState({
+    success: false,
+    opened: 0
+  })
 
   async function handleCreationNewAccountant() {
     if (!counter) return
@@ -44,8 +53,37 @@ export const CreateAccountant: React.FC<Props> = ({
     realm.write(() => {
       realm.create('Counters', data)
     })
+
     setCounter('')
+
+    setControlButtonType({
+      success: true,
+      opened: controlButtonType.opened + 1
+    })
   }
+
+  function handleCloseModal() {
+    setControlButtonType({
+      success: false,
+      opened: 0
+    })
+
+    onCloseModal()
+  }
+
+  useEffect(() => {
+    if (counter.length === 0 && controlButtonType.opened > 0) {
+      setControlButtonType({
+        success: true,
+        opened: controlButtonType.opened + 1
+      })
+    } else {
+      setControlButtonType({
+        success: false,
+        opened: 0
+      })
+    }
+  }, [counter])
 
   return (
     <Container transparent animationType="fade" {...rest}>
@@ -65,16 +103,24 @@ export const CreateAccountant: React.FC<Props> = ({
           <Footer>
             <Button
               backgroundColor={COLORS.border_light}
-              onPress={onCloseModal}
+              onPress={handleCloseModal}
             >
               <ButtonText textColor={COLORS.icon}>Cancel</ButtonText>
             </Button>
 
             <Button
-              backgroundColor={COLORS.main_light}
+              backgroundColor={
+                controlButtonType.success
+                  ? COLORS.success_light
+                  : COLORS.main_light
+              }
               onPress={handleCreationNewAccountant}
             >
-              <ButtonText textColor={COLORS.main}>Add</ButtonText>
+              {controlButtonType.success ? (
+                <Icon name="check" size={RFValue(16)} color={COLORS.success} />
+              ) : (
+                <ButtonText textColor={COLORS.main}>Add</ButtonText>
+              )}
             </Button>
           </Footer>
         </Content>
