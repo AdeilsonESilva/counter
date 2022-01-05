@@ -28,6 +28,8 @@ export const AccountantSession = styled.View`
   margin: 16px 0 32px;
 `
 
+export const SelectedCounterContainer = styled.View``
+
 export const ConfirmChangeButton = styled.TouchableOpacity.attrs({
   activeOpacity: 0.7
 })`

@@ -3,8 +3,10 @@ import { StatusBar } from 'react-native'
 
 import { useNavigationState } from '@react-navigation/native'
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs'
+import { useCounterSelected } from '@hooks/useCounterSelected'
 
 import { getRealm } from '@services/realm'
+import { ICounter } from '@dtos/counter'
 
 import { Header } from '@components/Header'
 import { AccountantsCard } from '@components/AccountantsCard'
@@ -20,18 +22,18 @@ import {
   EmptyTitle
 } from './styles'
 
-interface ICounter {
-  id: string
-  title: string
-  amount: string
-}
-
 export const Home: React.FC = () => {
   const TAB_HEIGHT = useBottomTabBarHeight()
+
+  const { counterSelected, setCounterSelected } = useCounterSelected()
 
   const [counters, setCounters] = useState<ICounter[]>([])
 
   const reloadRegisteredCounters = useNavigationState(state => state.index)
+
+  function handleCounterSelection(counter: ICounter) {
+    setCounterSelected(counter)
+  }
 
   async function handleDeleteCounter(id: string) {
     try {
@@ -42,6 +44,10 @@ export const Home: React.FC = () => {
       realm.write(() => {
         realm.delete(realm.objectForPrimaryKey('Counters', id))
       })
+
+      if (counterSelected!.id === id) {
+        setCounterSelected(null)
+      }
     } catch {
       console.log('Unable to delete counter.')
     }
@@ -80,7 +86,9 @@ export const Home: React.FC = () => {
                   title,
                   amount
                 }}
+                onPress={() => handleCounterSelection({ id, title, amount })}
                 onDelete={() => handleDeleteCounter(id)}
+                selected={counterSelected?.id === id}
                 delay={index}
               />
             ))}

@@ -6,6 +6,8 @@ import Icon from 'react-native-vector-icons/Feather'
 import { ThemeProvider } from 'styled-components'
 import { theme } from '@styles/theme'
 
+import { SelectedAccountantProvider } from '@hooks/useCounterSelected'
+
 import { Routes } from '@routes/.'
 
 Icon.loadFont()
@@ -13,7 +15,9 @@ Icon.loadFont()
 export const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
-      <Routes />
+      <SelectedAccountantProvider>
+        <Routes />
+      </SelectedAccountantProvider>
     </ThemeProvider>
   )
 }
