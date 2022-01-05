@@ -3,6 +3,8 @@ import { ModalProps, Platform } from 'react-native'
 
 import { useTheme } from 'styled-components'
 
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
 import uuid from 'react-native-uuid'
 import { RFValue } from 'react-native-responsive-fontsize'
 
@@ -46,7 +48,16 @@ export const CreateAccountant: React.FC<Props> = ({
       amount: '0'
     }
 
-    console.log(data)
+    const keyStorage = '@counter:storage'
+
+    const accountantsAlreadyRegistered = await AsyncStorage.getItem(keyStorage)
+    const accountantsAlreadyRegisteredFormatted =
+      JSON.parse(accountantsAlreadyRegistered!) || []
+
+    await AsyncStorage.setItem(
+      keyStorage,
+      JSON.stringify([...accountantsAlreadyRegisteredFormatted, data])
+    )
 
     setCounter('')
 

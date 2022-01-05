@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { StatusBar, Alert } from 'react-native'
 
+import { useFocusEffect } from '@react-navigation/native'
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs'
 import { useCounter } from '@hooks/useCounter'
+
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import { ICounter } from '@dtos/counter'
 
@@ -23,8 +26,24 @@ import {
 export const Home: React.FC = () => {
   const TAB_HEIGHT = useBottomTabBarHeight()
 
+  const keyStorage = '@counter:storage'
+
   const { counters, setCounters, counterSelected, setCounterSelected } =
     useCounter()
+
+  async function loadRegisteredCounters() {
+    try {
+      const data = await AsyncStorage.getItem(keyStorage)
+      const accountantsAlreadyRegistered = JSON.parse(data!) || []
+
+      setCounters(accountantsAlreadyRegistered)
+    } catch {
+      Alert.alert(
+        'An error has occurred',
+        'It was not possible to list the registered accountants. Try again.'
+      )
+    }
+  }
 
   function handleCounterSelection(counter: ICounter) {
     setCounterSelected(counter)
@@ -32,7 +51,19 @@ export const Home: React.FC = () => {
 
   async function handleDeleteCounter(id: string) {
     try {
+      const data = await AsyncStorage.getItem(keyStorage)
+      const accountantsAlreadyRegistered = JSON.parse(data!) as ICounter[]
+
+      const counterDeletedOnlyStorage = accountantsAlreadyRegistered.filter(
+        counter => counter.id !== id
+      )
+
       setCounters(counters.filter(counter => counter.id !== id))
+
+      await AsyncStorage.setItem(
+        keyStorage,
+        JSON.stringify(counterDeletedOnlyStorage)
+      )
 
       if (counterSelected) {
         if (counterSelected!.id === id) {
@@ -46,6 +77,12 @@ export const Home: React.FC = () => {
       )
     }
   }
+
+  useFocusEffect(
+    useCallback(() => {
+      loadRegisteredCounters()
+    }, [])
+  )
 
   return (
     <Container>

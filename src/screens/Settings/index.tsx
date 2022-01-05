@@ -3,6 +3,10 @@ import { StatusBar, Alert } from 'react-native'
 
 import { useCounter } from '@hooks/useCounter'
 
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
+import { ICounter } from '@dtos/counter'
+
 import { Header } from '@components/Header'
 import { Button } from '@components/Button'
 import { SelectedCounter } from '@components/SelectedCounter'
@@ -21,6 +25,8 @@ import {
 
 export const Settings: React.FC = () => {
   const { counterSelected, setCounterSelected } = useCounter()
+
+  const keyStorage = '@counter:storage'
 
   const [isModalDelete, setIsModalDelete] = useState(false)
   const [isModalCreateAccountant, setIsModalCreateAccountant] = useState(false)
@@ -41,6 +47,18 @@ export const Settings: React.FC = () => {
 
   async function handleDeleteCounter(id: string) {
     try {
+      const data = await AsyncStorage.getItem(keyStorage)
+      const accountantsAlreadyRegistered = JSON.parse(data!) as ICounter[]
+
+      const counterDeletedOnlyStorage = accountantsAlreadyRegistered.filter(
+        counter => counter.id !== id
+      )
+
+      await AsyncStorage.setItem(
+        keyStorage,
+        JSON.stringify(counterDeletedOnlyStorage)
+      )
+
       if (counterSelected!.id === id) {
         setCounterSelected(null)
       }
@@ -50,6 +68,36 @@ export const Settings: React.FC = () => {
       Alert.alert(
         'An error has occurred',
         'It was not possible to delete this counter. Try again.'
+      )
+    }
+  }
+
+  async function handleUpdateCounter() {
+    try {
+      const data = await AsyncStorage.getItem(keyStorage)
+      const accountantsAlreadyRegistered = JSON.parse(data!) as ICounter[]
+
+      const filteredCounter = accountantsAlreadyRegistered.filter(
+        counter => counter.id === counterSelected!.id
+      )
+
+      const [counter] = filteredCounter
+
+      const newQuantity = {
+        ...counter,
+        amount: counterSelected!.amount
+      }
+
+      const updatedAccountant = accountantsAlreadyRegistered.map(
+        currentAccountant =>
+          currentAccountant.id === counter.id ? newQuantity : currentAccountant
+      )
+
+      await AsyncStorage.setItem(keyStorage, JSON.stringify(updatedAccountant))
+    } catch {
+      Alert.alert(
+        'An error has occurred',
+        'Unable to update your counter. Try again.'
       )
     }
   }
@@ -91,7 +139,7 @@ export const Settings: React.FC = () => {
               }}
             />
 
-            <ConfirmChangeButton>
+            <ConfirmChangeButton onPress={handleUpdateCounter}>
               <ConfirmChangeButtonText>Confirm change</ConfirmChangeButtonText>
             </ConfirmChangeButton>
           </SelectedCounterContainer>
