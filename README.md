@@ -30,7 +30,7 @@
 Counter is an application to counter actions, habits, items, etc.
 
 ### Why was this app developed?
-I developed it as a case of the OneBrain selective process. They sent me a prototype and I decided to improve the project.
+I developed it as a case of the **onebrain** selective process. They sent me a prototype and I decided to improve the project.
 
 ### Who developed the new UI?
 [Darkton Hallisson](https://www.linkedin.com/in/darkton)
