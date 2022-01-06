@@ -45,3 +45,7 @@ I developed it as a case of the OneBrain selective process. They sent me a proto
 I even used [RealmDB](https://realm.io/) but I didn't see the need so I decided to use [AsyncStorage](https://reactnative.dev/docs/asyncstorage).
 
 ## 📱 Application result (IOS)
+
+<video width="320" height="240" controls>
+  <source src="./.github/demonstration.mov" type="video/mov">
+</video>
