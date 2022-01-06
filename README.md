@@ -47,5 +47,5 @@ I even used [RealmDB](https://realm.io/) but I didn't see the need so I decided 
 ## 📱 Application result (IOS)
 
 <video width="320" height="240" controls>
-  <source src="./.github/demonstration.mov" type="video/mov">
+  <source src="./.github/demonstration.mp4" type="video/mp4">
 </video>
