@@ -73,5 +73,5 @@ export const ClearButton = styled.TouchableOpacity.attrs({
 export const ClearTitle = styled.Text`
   font-size: ${RFValue(16)}px;
   font-family: ${({ theme }) => theme.FONTS.secondary_medium};
-  color: ${({ theme }) => theme.COLORS.description};
+  color: ${({ theme }) => theme.COLORS.icon};
 `

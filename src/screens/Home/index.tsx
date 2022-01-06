@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import { StatusBar, Alert } from 'react-native'
+import { Alert } from 'react-native'
 
 import { useFocusEffect } from '@react-navigation/native'
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs'
@@ -9,7 +9,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import { ICounter } from '@dtos/counter'
 
-import { Header } from '@components/Header'
 import { AccountantsCard } from '@components/AccountantsCard'
 
 import emptyLottie from '@utils/empty-lottie.json'
@@ -86,13 +85,6 @@ export const Home: React.FC = () => {
 
   return (
     <Container>
-      <StatusBar
-        translucent
-        barStyle="dark-content"
-        backgroundColor="transparent"
-      />
-      <Header title="Counters" />
-
       <Content>
         {counters.length ? (
           <ListCounters // Here a Flat-list will be added.

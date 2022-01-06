@@ -9,10 +9,8 @@ import { RFValue } from 'react-native-responsive-fontsize'
 import { Home } from '@screens/Home'
 import { Settings } from '@screens/Settings'
 
-import {
-  CustomTabBarContainer,
-  CustomTabBarIcon
-} from '@components/CustomTabBar'
+import { TabBarIcon } from '@components/TabBarIcon'
+import { Header } from '@components/Header'
 
 type RootStackParamList = {
   Home: any
@@ -25,32 +23,36 @@ declare global {
   }
 }
 
+interface Props {
+  toggleTheme(): void
+}
+
 const { Navigator, Screen } = createBottomTabNavigator()
 
-export const Routes: React.FC = () => {
-  const { COLORS } = useTheme()
+export const Routes: React.FC<Props> = ({ toggleTheme }) => {
+  const { NAME, COLORS } = useTheme()
 
   return (
     <NavigationContainer>
       <Navigator
         screenOptions={{
-          headerShown: false,
+          headerShown: true,
           tabBarStyle: {
             height: RFValue(70),
 
             borderTopColor: COLORS.border,
-            backgroundColor: 'transparent'
+            backgroundColor: NAME === 'light' ? COLORS.shape : COLORS.shape
           },
           tabBarShowLabel: false
         }}
-        tabBar={CustomTabBarContainer}
       >
         <Screen
           name="Home"
           component={Home}
           options={{
+            header: () => <Header title="Home" toggleTheme={toggleTheme} />,
             tabBarIcon: ({ focused }) => (
-              <CustomTabBarIcon icon="target" focused={focused} />
+              <TabBarIcon icon="target" focused={focused} />
             )
           }}
         />
@@ -58,8 +60,9 @@ export const Routes: React.FC = () => {
           name="Settings"
           component={Settings}
           options={{
+            header: () => <Header title="Settings" toggleTheme={toggleTheme} />,
             tabBarIcon: ({ focused }) => (
-              <CustomTabBarIcon icon="settings" focused={focused} />
+              <TabBarIcon icon="settings" focused={focused} />
             )
           }}
         />

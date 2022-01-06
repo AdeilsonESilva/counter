@@ -30,7 +30,7 @@ export const CreateAccountant: React.FC<Props> = ({
   onCloseModal,
   ...rest
 }) => {
-  const { COLORS } = useTheme()
+  const { NAME, COLORS } = useTheme()
 
   const [counter, setCounter] = useState('')
 
@@ -98,6 +98,9 @@ export const CreateAccountant: React.FC<Props> = ({
 
           <Input
             placeholder="Counter name"
+            placeholderTextColor={
+              NAME === 'dark' ? COLORS.border : COLORS.description
+            }
             selectionColor={
               Platform.OS === 'ios' ? COLORS.main : COLORS.main_light
             }

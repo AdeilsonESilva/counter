@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StatusBar, Alert } from 'react-native'
+import { Alert } from 'react-native'
 
 import { useCounter } from '@hooks/useCounter'
 import { useNavigation } from '@react-navigation/native'
@@ -8,7 +8,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import { ICounter } from '@dtos/counter'
 
-import { Header } from '@components/Header'
 import { Button } from '@components/Button'
 import { SelectedCounter } from '@components/SelectedCounter'
 import { CreateAccountant } from '@components/CreateAccountant'
@@ -109,14 +108,6 @@ export const Settings: React.FC = () => {
 
   return (
     <Container>
-      <StatusBar
-        translucent
-        barStyle="dark-content"
-        backgroundColor="transparent"
-      />
-
-      <Header title="Settings" />
-
       <Content>
         <Title>Counters</Title>
 

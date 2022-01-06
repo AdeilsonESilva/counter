@@ -1,13 +1,11 @@
 import React from 'react'
-import { TouchableOpacityProps, StyleSheet } from 'react-native'
+import { TouchableOpacityProps } from 'react-native'
 
 import { useTheme } from 'styled-components'
 
 import { Swipeable } from 'react-native-gesture-handler'
 import Icon from 'react-native-vector-icons/Feather'
 import { RFValue } from 'react-native-responsive-fontsize'
-
-import { theme } from '@styles/theme'
 
 import {
   Container,
@@ -50,7 +48,19 @@ export const AccountantsCard: React.FC<Props> = ({
       <Container transition={{ type: 'timing', delay: delay! * 100 }}>
         <CardBase
           activeOpacity={0.7}
-          style={selected && styles.active}
+          style={
+            selected && {
+              shadowColor: COLORS.main,
+              shadowOffset: {
+                width: 0,
+                height: 2
+              },
+              shadowOpacity: 0.25,
+              shadowRadius: 3.84,
+
+              elevation: 5
+            }
+          }
           active={selected}
           {...rest}
         >
@@ -64,17 +74,3 @@ export const AccountantsCard: React.FC<Props> = ({
     </Swipeable>
   )
 }
-
-const styles = StyleSheet.create({
-  active: {
-    shadowColor: theme.COLORS.main,
-    shadowOffset: {
-      width: 0,
-      height: 2
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-
-    elevation: 5
-  }
-})
