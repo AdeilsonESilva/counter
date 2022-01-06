@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { useTheme } from 'styled-components'
 import { useAnimationState } from 'moti'
@@ -10,12 +10,11 @@ import { Container, Title, ToggleThemeWrapper, ToggleTheme } from './styles'
 
 interface Props {
   title: string
+  toggleTheme(): void
 }
 
-export const Header: React.FC<Props> = ({ title }) => {
-  const { COLORS } = useTheme()
-
-  const [toggleTheme, setToggleTheme] = useState(false)
+export const Header: React.FC<Props> = ({ title, toggleTheme }) => {
+  const { NAME, COLORS } = useTheme()
 
   const animationState = useAnimationState({
     from: {
@@ -38,8 +37,8 @@ export const Header: React.FC<Props> = ({ title }) => {
     animationState.transitionTo('close')
 
     setTimeout(() => {
-      setToggleTheme(!toggleTheme)
       animationState.transitionTo('open')
+      toggleTheme()
     }, delay)
   }
 
@@ -50,7 +49,7 @@ export const Header: React.FC<Props> = ({ title }) => {
       <ToggleThemeWrapper state={animationState}>
         <ToggleTheme onPress={handleToggleTheme}>
           <Icon
-            name={toggleTheme ? 'sun' : 'moon'}
+            name={NAME === 'light' ? 'moon' : 'sun'}
             color={COLORS.title}
             size={RFValue(24)}
           />
