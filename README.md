@@ -41,7 +41,7 @@ I developed it as a case of the OneBrain selective process. They sent me a proto
 - [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/)
 - [Moti](https://moti.fyi/animations)
 
-⚠️ I even used [RealmDB](https://realm.io/) but I didn't see the need so I decided to use [AsyncStorage](https://reactnative.dev/docs/asyncstorage).
+I even used [RealmDB](https://realm.io/) but I didn't see the need so I decided to use [AsyncStorage](https://reactnative.dev/docs/asyncstorage).
 
 
 ## 🖼 Prototype
