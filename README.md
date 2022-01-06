@@ -34,7 +34,7 @@ I developed it as a case of the OneBrain selective process. They sent me a proto
 
 ### Who developed the new UI?
 [Darkton Hallisson](https://www.linkedin.com/in/darkton)
-[Figma](https://www.figma.com/file/4zEwCmw0J2qPTyvbdMamHB/Counter-Project?node-id=0%3A1)
+([Figma](https://www.figma.com/file/4zEwCmw0J2qPTyvbdMamHB/Counter-Project?node-id=0%3A1))
 
 
 ## 🚀 Technologies
