@@ -4,7 +4,8 @@ import { MotiView } from 'moti'
 
 import { RFValue } from 'react-native-responsive-fontsize'
 import { getStatusBarHeight } from 'react-native-iphone-x-helper'
-import { BorderlessButton } from 'react-native-gesture-handler'
+// import { BorderlessButton } from 'react-native-gesture-handler'
+import { Pressable as BorderlessButton } from 'react-native'
 
 export const Container = styled.View`
   width: 100%;
